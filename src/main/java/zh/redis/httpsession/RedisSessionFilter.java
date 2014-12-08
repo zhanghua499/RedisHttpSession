@@ -24,7 +24,7 @@ public class RedisSessionFilter implements Filter {
 		if(sessionTimeOutStr == null)
 			sessionTimeOutStr = "1800";
 		int sessionTimeOut = Integer.parseInt(sessionTimeOutStr);
-		CacheUtil.initCache(sessionTimeOut);
+//		CacheUtil.initCache(sessionTimeOut);
 		this.sessionManager = new RedisSessionManager(host, port,sessionTimeOut,loadBalanceClass);
 	}
 

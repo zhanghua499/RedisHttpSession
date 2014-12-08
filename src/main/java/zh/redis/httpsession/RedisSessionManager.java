@@ -138,13 +138,13 @@ public class RedisSessionManager {
 			//如果Session过期
 			if (session.expired){
 				//清楚本地缓存数据
-				CacheUtil.removeKey(session.id);
+//				CacheUtil.removeKey(session.id);
 				//清楚Redis中的数据
 				this.getRedisClient(session.id).del(sessionid);
 			}
 			else{
 				//在本地缓存中保存Session
-				CacheUtil.put(session.id, session);
+//				CacheUtil.put(session.id, session);
 				//在远程Redis中保存Session并且重新设置过期时间
 				this.getRedisClient(session.id).set(sessionid, SeesionSerializer.serialize(session), this.sessionTimeOut);
 			}
@@ -232,10 +232,10 @@ public class RedisSessionManager {
 		RedisHttpSession session;
 		try {
 			//先成本地缓存中加载
-			Object cacheSession = CacheUtil.getSerialVal(sessionId);
-			if(cacheSession != null)
-				session = (RedisHttpSession)cacheSession;
-			else
+//			Object cacheSession = CacheUtil.getSerialVal(sessionId);
+//			if(cacheSession != null)
+//				session = (RedisHttpSession)cacheSession;
+//			else
 				//从远程缓存中加载
 				session = SeesionSerializer.deserialize(this.getRedisClient(sessionId).getByte(generatorSessionKey(sessionId)));
 			//重新加载到本地缓存的Session需要重新设置同步标志与新建标志
